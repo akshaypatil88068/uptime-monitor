@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Uptime Monitor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta http-equiv="refresh" content="5">
+</head>
+<body>
+
+<h2>Add Website</h2>
+<form action="/add" method="POST">
+    <input type="text" name="url" placeholder="Enter URL" required>
+    <button type="submit">Add</button>
+</form>
+
+<h2>Monitored Websites</h2>
+<table border="1">
+    <tr>
+        <th>URL</th>
+        <th>Status</th>
+        <th>Last Checked</th>
+    </tr>
+
+    {% for site in websites %}
+    <tr>
+        <td>{{ site[1] }}</td>
+        <td>{{ site[2] }}</td>
+        <td>{{ site[3] }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+</body>
+</html>

@@ -1,3 +1,7 @@
+from db import init_db
+
+init_db()
+
 from flask import Flask, render_template, request, redirect
 from db import cursor, conn
 from flask import Flask, render_template, request, redirect

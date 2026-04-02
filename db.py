@@ -1,13 +1,22 @@
-import mysql.connector
+import sqlite3
 
-conn = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    password="@kki8806810022",
-    database="uptime_db"
-)
+def get_connection():
+    conn = sqlite3.connect("database.db", check_same_thread=False)
+    return conn
 
-if conn.is_connected():
-    print("Connected to MySQL successfully")
 
-cursor = conn.cursor()
+def init_db():
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS websites (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        url TEXT,
+        status TEXT,
+        last_checked TEXT
+    )
+    """)
+
+    conn.commit()
+    conn.close()
